@@ -19,15 +19,6 @@ class SIMPLESHOOTER_API AShooterCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta=(AllowprivateAccess="true"));
-	class UInputMappingContext* DefaultMappingContext;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta=(AllowPrivateAccess="true"));
-	class UInputAction* MoveAction;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta=(AllowPrivateAccess="true"));
-	class UInputAction* JumpAction;
-
 public:
 	// Sets default values for this character's properties
 	AShooterCharacter();
@@ -36,9 +27,33 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:
+private:
+	//CameraComponent
+	UPROPERTY(VisibleANywhere, BlueprintReadOnly, Category = "CameraComponent", meta = (AllowPrivateAccess="true"))
+	class USpringArmComponent* SpringArm;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CameraComponent", meta = (AllowPrivateAccess="true"))
+	class UCameraComponent* Camera;
+
+	//IMC
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta=(AllowprivateAccess="true"));
+	class UInputMappingContext* DefaultMappingContext;
+	//IA
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta=(AllowPrivateAccess="true"));
+	class UInputAction* MoveAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta=(AllowPrivateAccess="true"));
+	class UInputAction* JumpAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta=(AllowPrivateAccess="true"));
 	class UInputAction* LookAction;
+
+	//LookRate, LookSpeed
+	UPROPERTY(EditAnywhere)
+	float RotationRate = 10;
+
+	UPROPERTY(EditDefaultsOnly, Category="Weapon")
+	TSubclassOf<class AGun> GunClass;
+
+	UPROPERTY()
+	AGun* Gun;
 
 protected:
 	void Move(const FInputActionValue& Value);
