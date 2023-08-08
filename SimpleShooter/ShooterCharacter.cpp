@@ -36,6 +36,11 @@ void AShooterCharacter::BeginPlay()
 	}
 
 	Gun = GetWorld()->SpawnActor<AGun>(GunClass);
+	GetMesh()->HideBoneByName(TEXT("weapon_r"), EPhysBodyOp::PBO_None);
+	Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
+	Gun->SetOwner(this);
+
+
 }
 void AShooterCharacter::Move(const FInputActionValue& Value)
 {
