@@ -34,16 +34,15 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CameraComponent", meta = (AllowPrivateAccess="true"))
 	class UCameraComponent* Camera;
 
-	//IMC
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta=(AllowprivateAccess="true"));
-	class UInputMappingContext* DefaultMappingContext;
 	//IA
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta=(AllowPrivateAccess="true"));
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta=(AllowPrivateAccess="true"))
 	class UInputAction* MoveAction;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta=(AllowPrivateAccess="true"));
-	class UInputAction* JumpAction;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta=(AllowPrivateAccess="true"));
-	class UInputAction* LookAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta=(AllowPrivateAccess="true"))
+	UInputAction* LookAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta=(AllowPrivateAccess="true"))
+	UInputAction* JumpAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta=(AllowPrivateAccess="true"))
+	UInputAction* ShootAction;
 
 	//LookRate, LookSpeed
 	UPROPERTY(EditAnywhere)
@@ -58,6 +57,7 @@ private:
 protected:
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
+	void Shoot();
 
 public:	
 	// Called every frame
