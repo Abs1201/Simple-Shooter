@@ -47,6 +47,10 @@ private:
 	//LookRate, LookSpeed
 	UPROPERTY(EditAnywhere)
 	float RotationRate = 10;
+	UPROPERTY(EditDefaultsOnly)
+	float MaxHealth = 101;
+	UPROPERTY(VisibleAnywhere)
+	float Health;
 
 	UPROPERTY(EditDefaultsOnly, Category="Weapon")
 	TSubclassOf<class AGun> GunClass;
@@ -60,10 +64,14 @@ protected:
 	void Shoot();
 
 public:	
+	UFUNCTION(BlueprintPure)
+	bool IsDead() const;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 
 };
