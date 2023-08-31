@@ -14,11 +14,14 @@ void ASimpleShooterPlayerController::BeginPlay()
         Subsystem->AddMappingContext(DefaultMappingContext, 0);
     }
 
-    UE_LOG(LogTemp, Warning, TEXT("testtest"));
+    HUD = CreateWidget(this, HUDClass);
+    HUD->AddToViewport();
+
 }
 
 void ASimpleShooterPlayerController::GameHasEnded(class AActor* EndGameFocus, bool bIsWinner)
 {
+    HUD->RemoveFromParent();
     Super::GameHasEnded(EndGameFocus, bIsWinner);
     if(bIsWinner){
         UUserWidget* WinScreen = CreateWidget(this, WinScreenClass);
